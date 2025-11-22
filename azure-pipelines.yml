@@ -1,27 +1,78 @@
 trigger:
-- main
+  branches:
+    include:
+      - main
 
-jobs:
-  - job: TerraformInitPlan
-    displayName: Terraform Init Plan
-    pool: Default
-    steps:
-    - task: TerraformInstaller@1
-      inputs:
-        terraformVersion: 'latest'
-    - task: TerraformTask@5
-      inputs:
-        provider: 'azurerm'
-        command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
-        backendServiceArm: 'ServiceConnection12'
-        backendAzureRmStorageAccountName: 'tfstate1230'
-        backendAzureRmContainerName: 'tfcontainer'
-        backendAzureRmKey: 'demo.terraform.tfstate'
+stages:
+  - stage: Build
+    displayName: Build Stage
+    jobs:
+      - job: TerraformInitAndPlan
+        displayName: Terraform Init And Plan
+        pool: Default
+        steps:
+        - task: TerraformInstaller@1
+          inputs:
+            terraformVersion: 'latest'
 
-    - task: TerraformTask@5
-      inputs:
-        provider: 'azurerm'
-        command: 'plan'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
-        environmentServiceNameAzureRM: 'ServiceConnection12'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
+            backendServiceArm: 'ServiceConnection12'
+            backendAzureRmStorageAccountName: 'tfstate1230'
+            backendAzureRmContainerName: 'tfcontainer'
+            backendAzureRmKey: 'demo.terraform.tfstate'
+
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
+            environmentServiceNameAzureRM: 'ServiceConnection12'
+
+  - stage: Scan
+    displayName: Scanning Stage
+    jobs:
+      - job: TFSec
+        displayName: TFSec Scan
+        pool: Default
+        steps:
+        - task: tfsec@1
+          inputs:
+            version: 'v1.26.0'
+
+  - stage: Deploy
+    displayName: Deploy Stage
+    jobs:
+      - job: ManualValidation
+        displayName: Manual Validation
+        pool: server
+        steps:
+        - task: ManualValidation@1
+          inputs:
+            notifyUsers: 'priyajaisw9554@gmail.com'
+            approvers: 'priyajaisw9554@gmail.com'
+
+      - job: TerraformApply
+        displayName: Terraform Apply
+        dependsOn: ManualValidation
+        pool: Default
+        steps:
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
+            backendServiceArm: 'ServiceConnection12'
+            backendAzureRmStorageAccountName: 'tfstate1230'
+            backendAzureRmContainerName: 'tfcontainer'
+            backendAzureRmKey: 'demo.terraform.tfstate'
+
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/Environment/dev'
+            environmentServiceNameAzureRM: 'ServiceConnection12'
