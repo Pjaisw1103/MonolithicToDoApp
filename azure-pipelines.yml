@@ -8,11 +8,11 @@ pool: Default
 parameters:
   - name: runScan
     displayName: "Run Scanning Stage?"
-    type: boolean
-    default: true
+    type: string
     values:
       - true
       - false
+    default: true
 
 variables: 
   WorkDir: '$(System.DefaultWorkingDirectory)/Environment/dev'
@@ -47,6 +47,7 @@ stages:
 
   - stage: Scan
     displayName: Scanning Stage
+    condition: eq('${{ parameters.runScan }}', 'true')
     jobs:
       - job: TFSec
         displayName: TFSec Scan
