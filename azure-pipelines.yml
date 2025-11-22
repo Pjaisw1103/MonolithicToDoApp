@@ -52,8 +52,8 @@ stages:
         steps:
         - task: ManualValidation@1
           inputs:
-            notifyUsers: 'priyajaisw9554@gmail.com'
-            approvers: 'priyajaisw9554@gmail.com'
+            notifyUsers: 'priya@jaiswal4656outlook.onmicrosoft.com'
+            approvers: 'priya@jaiswal4656outlook.onmicrosoft.com'
 
       - job: TerraformApply
         displayName: Terraform Apply
