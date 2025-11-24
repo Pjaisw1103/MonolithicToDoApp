@@ -72,6 +72,7 @@ stages:
       - job: TerraformApply
         displayName: Terraform Apply
         dependsOn: ManualValidation
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
         steps:
         - task: TerraformTask@5
           inputs:
