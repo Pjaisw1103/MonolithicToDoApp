@@ -89,6 +89,7 @@ variable "vms" {
       kvs_name               = string
       vm_name                = string
       size                   = string
+      script_name            = string
       admin_username         = optional(string)
       admin_password         = optional(string)
       source_image_reference = map(string)

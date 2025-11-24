@@ -20,7 +20,7 @@ variables:
 stages:
   - stage: Build
     displayName: Build Stage
-    jobs:
+    jobs: 
       - job: TerraformInitAndPlan
         displayName: Terraform Init And Plan
         steps:
