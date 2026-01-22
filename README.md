@@ -1,63 +1,93 @@
-<h1 align="center">🚀 Monolithic 3-Tier Application Deployment</h1>
+<h1 align="center">🚀 Monolithic 3-Tier Application Deployment on Azure</h1>
 
 <p align="center">
-  <b>CI/CD Automation using Azure DevOps Pipelines</b><br>
-  ⚛️ ReactJS • 🐍 Python • 🗄️ Azure MS SQL • ☁️ Azure VM
+  <b>End-to-End CI/CD Automation using Azure DevOps Pipelines</b><br><br>
+  ⚛️ ReactJS &nbsp;•&nbsp; 🐍 Python &nbsp;•&nbsp; 🗄️ Azure MS SQL &nbsp;•&nbsp; ☁️ Azure Virtual Machine
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Azure-DevOps-blue?logo=azuredevops" />
   <img src="https://img.shields.io/badge/CI/CD-Automated-success" />
   <img src="https://img.shields.io/badge/Architecture-3--Tier-important" />
+  <img src="https://img.shields.io/badge/IaC-Terraform-623CE4?logo=terraform" />
 </p>
 
----
+<hr/>
 
-## 📌 Project Overview
+<h2>📌 Project Overview</h2>
 
-This project demonstrates a **Monolithic 3-Tier Application** deployed on **Microsoft Azure**
-using a fully automated **Azure DevOps CI/CD Pipeline**.
+<p>
+This project demonstrates a <b>Monolithic 3-Tier Application</b> deployed on
+<b>Microsoft Azure</b> using a fully automated
+<b>Azure DevOps CI/CD Pipeline</b> and <b>Terraform Infrastructure as Code (IaC)</b>.
+</p>
 
-The pipeline automates the complete lifecycle including  
-**Build → Test → Artifact Creation → Deployment**, ensuring fast, reliable, and repeatable releases 🚀.
+<p>
+The complete application lifecycle is automated:
+</p>
 
----
+<p align="center">
+<b>Code Commit → Build → Test → Artifact Creation → Deployment</b>
+</p>
 
-## 🧠 Application Architecture
+<p>
+This ensures fast, reliable, repeatable, and production-ready deployments 🚀
+</p>
 
-The application follows a classic **3-Tier Architecture**:
+<hr/>
 
-- 🎨 **Frontend**: ReactJS  
-  - Build generated using Azure DevOps  
-  - Stored as an artifact  
-  - Deployed on Azure Virtual Machine  
+<h2>🧠 Application Architecture (3-Tier)</h2>
 
-- ⚙️ **Backend**: Python  
-  - Handles business logic and REST APIs  
-  - Connected to database using secure connection string  
+<ul>
+  <li>
+    <b>🎨 Frontend (ReactJS)</b>
+    <ul>
+      <li>ReactJS application built via Azure DevOps pipeline</li>
+      <li>Production build stored as pipeline artifact</li>
+      <li>Artifact deployed on Azure Virtual Machine using NGINX</li>
+    </ul>
+  </li>
+  <br/>
+  <li>
+    <b>⚙️ Backend (Python)</b>
+    <ul>
+      <li>Python-based REST APIs</li>
+      <li>Handles business logic</li>
+      <li>Securely connects to database using connection string</li>
+    </ul>
+  </li>
+  <br/>
+  <li>
+    <b>🗄️ Database (Azure MS SQL)</b>
+    <ul>
+      <li>Managed Azure MS SQL Database</li>
+      <li>Secure and scalable cloud database layer</li>
+    </ul>
+  </li>
+</ul>
 
-- 🗄️ **Database**: Azure MS SQL  
-  - Secure, scalable cloud database  
+<hr/>
 
----
+<h2>🏗️ Architecture & CI/CD Flow</h2>
 
-## 🏗️ Architecture Flow Diagram
-
-```text
+<pre>
 👤 User
    |
    v
-🌐 ReactJS Frontend (Azure VM)
+🌐 ReactJS Frontend (Azure VM + NGINX)
    |
    v
-⚙️ Python Backend
+⚙️ Python Backend APIs
    |
    v
 🗄️ Azure MS SQL Database
 
-Code Commit (GitHub Repository)
+
+🔁 CI/CD Pipeline Flow (Azure DevOps)
+
+Code Commit (GitHub)
         ↓
-Azure DevOps Pipeline Triggered
+Pipeline Trigger
         ↓
 Build Stage
   - ReactJS Build
@@ -68,42 +98,115 @@ Test Stage
 Artifact Creation
         ↓
 Deployment Stage
-  - Deploy to Azure Virtual Machine
+  - Deploy artifacts to Azure Virtual Machine
+</pre>
 
-## 🛠️ Technology Stack
+<hr/>
 
-| Layer     | Technology |
-|----------|------------|
-| Frontend | ⚛️ ReactJS |
-| Backend  | 🐍 Python |
-| Database | 🗄️ Azure MS SQL |
-| CI/CD    | 🔁 Azure DevOps Pipelines |
-| Cloud    | ☁️ Microsoft Azure |
-| Compute  | 🖥️ Azure Virtual Machine |
+<h2>🛠️ Technology Stack</h2>
 
----
+<table>
+  <tr>
+    <th>Layer</th>
+    <th>Technology</th>
+  </tr>
+  <tr>
+    <td>Frontend</td>
+    <td>⚛️ ReactJS</td>
+  </tr>
+  <tr>
+    <td>Backend</td>
+    <td>🐍 Python</td>
+  </tr>
+  <tr>
+    <td>Database</td>
+    <td>🗄️ Azure MS SQL</td>
+  </tr>
+  <tr>
+    <td>CI/CD</td>
+    <td>🔁 Azure DevOps Pipelines</td>
+  </tr>
+  <tr>
+    <td>Infrastructure</td>
+    <td>🌍 Terraform (IaC)</td>
+  </tr>
+  <tr>
+    <td>Cloud</td>
+    <td>☁️ Microsoft Azure</td>
+  </tr>
+  <tr>
+    <td>Compute</td>
+    <td>🖥️ Azure Virtual Machine</td>
+  </tr>
+</table>
 
-## ✨ Key Features
+<hr/>
 
-- ✔️ Fully automated CI/CD using Azure DevOps  
-- ✔️ Monolithic 3-Tier architecture  
-- ✔️ Artifact-based deployment strategy  
-- ✔️ Secure backend–database integration  
-- ✔️ Cloud-ready and scalable solution  
+<h2>✨ Key Features</h2>
 
----
+<ul>
+  <li>✔️ Fully automated CI/CD pipeline using Azure DevOps</li>
+  <li>✔️ Monolithic 3-Tier architecture implementation</li>
+  <li>✔️ Artifact-based deployment strategy</li>
+  <li>✔️ Secure backend–database integration</li>
+  <li>✔️ Infrastructure provisioning using Terraform</li>
+  <li>✔️ Cloud-ready and scalable Azure solution</li>
+</ul>
 
-## 📂 Repository Structure
+<hr/>
 
-```text
-├── frontend/          # ReactJS Application
-├── backend/           # Python Backend APIs
-├── azure-pipelines/   # Azure DevOps Pipeline YAML
-├── scripts/           # Deployment Scripts
-└── README.md          # Project Documentation
+<h2>📂 Repository Structure</h2>
 
-## 🚀 Deployment Summary
+<pre>
+├── frontend/                 # ReactJS Application
+├── backend/                  # Python Backend APIs
+├── azure-pipelines/          # Azure DevOps Pipeline YAML
+├── scripts/                  # VM setup scripts (NGINX, Python)
+├── Environment/
+│   ├── dev/                  # Dev environment Terraform configs
+│   └── prod/                 # Prod environment Terraform configs
+├── Modules/                  # Reusable Terraform modules
+│   ├── azurerm_compute/
+│   ├── azurerm_networking/
+│   ├── azurerm_key_vault/
+│   ├── azurerm_public_ip/
+│   └── azurerm_resource_group/
+└── README.md                 # Project Documentation
+</pre>
 
-The **Azure DevOps CI/CD pipeline** automates the complete deployment process, eliminating the need for any manual intervention.  
-Build artifacts ensure **consistent, reliable, and repeatable deployments** across different environments.  
-The application is successfully deployed on an **Azure Virtual Machine**, making it a **production-ready setup**.
+<hr/>
+
+<h2>🚀 Deployment Summary</h2>
+
+<p>
+The <b>Azure DevOps CI/CD pipeline</b> automates the complete deployment process,
+eliminating manual intervention.
+</p>
+
+<p>
+Build artifacts ensure <b>consistent, reliable, and repeatable deployments</b>
+across environments.
+</p>
+
+<p>
+Infrastructure provisioning is handled using <b>Terraform</b>, and the application
+is successfully deployed on an <b>Azure Virtual Machine</b> with a
+<b>production-ready setup</b>.
+</p>
+
+<hr/>
+
+<h2>👩‍💻 Author</h2>
+
+<p>
+<b>Priya Jaiswal</b><br/>
+🚀 DevOps Fresher | Azure | CI/CD | Terraform
+</p>
+
+<hr/>
+
+<p align="center">
+⭐ If you like this project, don’t forget to <b>star the repository</b> ⭐
+</p>
+
+
