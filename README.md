@@ -70,36 +70,52 @@ This ensures fast, reliable, repeatable, and production-ready deployments 🚀
 
 <h2>🏗️ Architecture & CI/CD Flow</h2>
 
-<pre>
-👤 User
-   |
-   v
-🌐 ReactJS Frontend (Azure VM + NGINX)
-   |
-   v
-⚙️ Python Backend APIs
-   |
-   v
-🗄️ Azure MS SQL Database
+<table align="center">
+  <tr>
+    <td align="center">
+      👤 <br/>
+      <b>User</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">⬇️</td>
+  </tr>
+  <tr>
+    <td align="center" style="border:1px solid #ddd; padding:10px;">
+      🌐 <br/>
+      <b>Frontend</b><br/>
+      ReactJS<br/>
+      Hosted on Azure VM (NGINX)
+    </td>
+  </tr>
+  <tr>
+    <td align="center">⬇️</td>
+  </tr>
+  <tr>
+    <td align="center" style="border:1px solid #ddd; padding:10px;">
+      ⚙️ <br/>
+      <b>Backend</b><br/>
+      Python REST APIs<br/>
+      Business Logic Layer
+    </td>
+  </tr>
+  <tr>
+    <td align="center">⬇️</td>
+  </tr>
+  <tr>
+    <td align="center" style="border:1px solid #ddd; padding:10px;">
+      🗄️ <br/>
+      <b>Database</b><br/>
+      Azure MS SQL<br/>
+      Secure Connection String
+    </td>
+  </tr>
+</table>
 
+<p align="center">
+<b>Frontend ↔ Backend ↔ Database</b> communication follows a secure and scalable 3-tier architecture.
+</p>
 
-🔁 CI/CD Pipeline Flow (Azure DevOps)
-
-Code Commit (GitHub)
-        ↓
-Pipeline Trigger
-        ↓
-Build Stage
-  - ReactJS Build
-  - Python Backend Build
-        ↓
-Test Stage
-        ↓
-Artifact Creation
-        ↓
-Deployment Stage
-  - Deploy artifacts to Azure Virtual Machine
-</pre>
 
 <hr/>
 
@@ -208,5 +224,6 @@ is successfully deployed on an <b>Azure Virtual Machine</b> with a
 <p align="center">
 ⭐ If you like this project, don’t forget to <b>star the repository</b> ⭐
 </p>
+
 
 
