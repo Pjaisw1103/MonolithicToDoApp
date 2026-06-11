@@ -1,0 +1,10 @@
+# Pipeline for PROD environment
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo "Deploying to PROD environment"
+  displayName: 'Deploy to PROD'

@@ -1,0 +1,10 @@
+# Pipeline for DEV environment
+trigger:
+- dev
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo "Deploying to DEV environment"
+  displayName: 'Deploy to DEV'

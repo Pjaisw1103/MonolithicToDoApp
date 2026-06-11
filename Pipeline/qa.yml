@@ -1,0 +1,10 @@
+# Pipeline for QA environment
+trigger:
+- qa
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo "Deploying to QA environment"
+  displayName: 'Deploy to QA'
