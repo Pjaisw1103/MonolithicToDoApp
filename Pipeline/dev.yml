@@ -1,10 +1,102 @@
-# Pipeline for DEV environment
 trigger:
-- dev
+  branches:
+    include:
+      - main
+      - features/*
 
-pool:
-  vmImage: 'ubuntu-latest'
+pool: default
 
-steps:
-- script: echo "Deploying to DEV environment"
-  displayName: 'Deploy to DEV'
+variables:
+  workingDirectory: "$(System.DefaultWorkingDirectory)/Environment/dev"
+  backendServiceArm: "Priya(803ytf07-hgu89-4a01-9b2c-19663d855b6fb6)"
+  environmentServiceNameAzureRM: "Priya(803ytf07-hgu89-4a01-9b2c-19663d855b6fb6)"
+
+stages:
+  - stage: StaticAnalysisCode
+    displayName: Pre-Commit & Static Analysis Stage
+    jobs:
+      - job: TerraformValidate
+        displayName: Terraform Validate
+        steps:
+          - task: TerraformTask@5
+            inputs:
+              provider: "azurerm"
+              command: "init"
+              workingDirectory: $(workingDirectory)
+              backendServiceArm: $(backendServiceArm)
+          - task: TerraformTask@5
+            inputs:
+              provider: "azurerm"
+              command: "validate"
+              workingDirectory: $(workingDirectory)
+
+      - job: TerraformFmt
+        displayName: Terraform Fmt
+        steps:
+          - task: TerraformTask@5
+            inputs:
+              provider: "azurerm"
+              command: "custom"
+              workingDirectory: $(workingDirectory)
+              outputTo: "console"
+              customCommand: "terraform fmt"
+
+      - job: TfSecScan
+        displayName: Tfsec Scan
+        steps:
+          - task: tfsec@1
+            inputs:
+              version: "v1.26.0"
+              dir: $(workingDirectory)
+
+  - stage: Plan_Review
+    displayName: Plan & Review Stage
+    jobs:
+      - job: Plan
+        displayName: Terraform Plan
+        steps:
+          - task: TerraformTask@5
+            inputs:
+              provider: "azurerm"
+              command: "init"
+              workingDirectory: $(workingDirectory)
+              backendServiceArm: $(backendServiceArm)
+          - task: TerraformTask@5
+            inputs:
+              provider: "azurerm"
+              command: "plan"
+              workingDirectory: $(workingDirectory)
+              environmentServiceNameAzureRM: $(environmentServiceNameAzureRM)
+
+  - stage: ManualValidation
+    displayName: Approve & Governance Stage
+    jobs:
+      - job: ManualValidation
+        displayName: Manual Approval
+        pool: server
+        steps:
+          - task: ManualValidation@1
+            inputs:
+              notifyUsers: "priyajaisw9554@gmail.com"
+              approvers: "Priya"
+
+  - stage: DeployStage
+    displayName: Deploy/Apply Stage
+    jobs:
+      - job: Apply
+        displayName: Terraform Apply
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+        steps:
+          - task: TerraformTask@5
+            inputs:
+              provider: "azurerm"
+              command: "init"
+              workingDirectory: $(workingDirectory)
+              backendServiceArm: $(backendServiceArm)
+
+          - task: TerraformTask@5
+            inputs:
+              provider: "azurerm"
+              command: "apply"
+              workingDirectory: $(workingDirectory)
+              environmentServiceNameAzureRM: $(environmentServiceNameAzureRM)
