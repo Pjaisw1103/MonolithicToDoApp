@@ -3,7 +3,8 @@
 <p>
   <a href="https://azure.microsoft.com/"><img src="https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white" alt="Azure"></a>
   <a href="https://www.terraform.io/"><img src="https://img.shields.io/badge/terraform-%235835CC.svg?style=for-the-badge&logo=terraform&logoColor=white" alt="Terraform"></a>
-  <a href="https://github.com/features/actions"><img src="https://img.shields.io/badge/github%20actions-%232088FF.svg?style=for-the-badge&logo=AzureDevOps&logoColor=white" alt="Azure DevOps"></a>
+  <a href="https://azure.microsoft.com/en-us/products/devops">
+  <img src="https://img.shields.io/badge/Azure%20DevOps-0078D7?style=for-the-badge&logo=azuredevops&logoColor=white" alt="Azure DevOps"></a>
 </p>
 
 <p>An enterprise-grade, highly secure, scalable, and fully automated multi-environment (Dev, Staging, Prod) 3-Tier Web Application Infrastructure deployment on Microsoft Azure using Infrastructure as Code (IaC).</p>
@@ -14,7 +15,7 @@
 <p>This repository provisions a secure, highly-available 3-tier architecture isolated inside private Virtual Networks (VNets), managed securely via Azure Bastion, and audited by Azure Monitor.</p>
 
 <h3>🗺️ Architecture Diagram</h3>
-<img src="./Screenshot%202026-06-11%20111246.png" alt="Enterprise Azure Architecture" width="100%" />
+<img src="./Screenshot%202026-06-11%20111246.png" alt="Enterprise Azure Architecture" width="50%" />
 
 <hr />
 
